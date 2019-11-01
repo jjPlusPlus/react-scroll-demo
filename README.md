@@ -1,45 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Scroll Demo  
 
-## Available Scripts
+_The goal of this demo is to create a webpage that performs a network request when the user reaches the bottom of the page._   
 
-In the project directory, you can run:
+## Components  
 
-### `npm start`
+__ScrollComponent__  
+A high-order component that keeps track of the current scroll position as a percentage of the page height.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features  
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+__Strict Typing with TypeScript__  
+lorem ipsum sit dolor amet  
 
-### `npm test`
+__State Managment via Redux & Sagas__  
+lorem ipsum sit dolor amet  
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+__Testing components via Jest__  
+lorem ipsum sit dolor amet  
 
-### `npm run build`
+## On Formatting JSON  
+The content of this project is an article describing how to manipulate JSON-formatted payloads for different tasks. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+// Given a server response with a schema that looks like:  
+[
+    {
+        "key": {
+            "day": [int],
+            "id": [uuid]
+        },
+        "value": [int] 
+    }
+]
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+__Formatting JSON for charts__  
+For use in a chart, you could make use of an adapter that parses the JSON such that the data is grouped by day. 
 
-### `npm run eject`
+```
+[
+    {
+        day: 1,
+        values: [
+            {
+                "id": a,
+                "value": 7
+            }, {
+                "id": b,
+                "value": 8
+            }, {
+                "id": c,
+                "value": 9
+            }
+        ]
+    },
+    ...
+]
+```  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+__Formatting JSON for a table layout__  
+For a table layout, you could write an adapter that parses the JSON such that the data fits the layout of a table row
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# react-scroll-demo
+```
+[
+	{ day: 1, value: 7, id: a }
+	{ day: 1, value: 8, id: b }
+	{ day: 1, value: 9, id: c }
+	{ day: 2, value: 17, id: a }
+	...
+]
+```
