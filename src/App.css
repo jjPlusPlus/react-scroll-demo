@@ -1,22 +1,51 @@
-.App {
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #efefef;
+}
+
+.page-content {
+    max-width: 400px;
+    margin: 15px auto;
+    padding: 15px;
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+}
+
+.scroll-info {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    margin: 5px;
+    padding: 5px;
+    background: #333;
+    color: #fff;
+    font-size: 0.8em;
+}
+
+table {
+  width: 100%;
+  margin: 20px auto;
+  table-layout: auto;
+}
+table, td, th {
+  border-collapse: collapse;
+}
+thead {
+    background: #000;
+    color: #fff;
+}
+
+th, td {
+  padding: 10px;
+  border: solid 1px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
+.user {
+    padding: 15px;
+    border: 1px solid #575757;
+    border-radius: 10px;
+    text-align: center;
 }
