@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import ScrollWrapper from '../ScrollWrapper';
-import { number } from 'prop-types';
 
+import { connect } from 'react-redux';
+import { AnyAction, Dispatch, compose } from 'redux';
+
+import ScrollWrapper from '../ScrollWrapper';
+
+import { AppState } from '../../types';
+
+import { getData } from '../../actions';
 import * as c3 from "c3";
 
 const JSONA = [
@@ -88,27 +94,33 @@ const JSONC = [
     { day: 3, value: 29, id: "c" },
 ];
 
-interface Props {
+interface OwnProps {
     verticalPosition: number;
     scrollPercentage: number;
     isBottom: Boolean;
     isTop: Boolean;
 }
 
-interface State {
-    hasReachedBottom: Boolean,
-    loading: boolean,
-    data: any
+interface OwnState {
+    hasReachedBottom: Boolean
 }
 
-class HomePage extends Component<Props, State> {
+interface StateProps {
+    data: any;
+    loading: boolean;
+}
+interface DispatchProps {
+    getData: () => void;
+}
+
+type Props = OwnProps & DispatchProps & StateProps;
+
+class HomePage extends Component<Props, OwnState> {
 
     constructor(props: Props) {
         super(props);
         this.state = {
             hasReachedBottom: false,
-            loading: false,
-            data: null
         }
     }
 
@@ -130,35 +142,32 @@ class HomePage extends Component<Props, State> {
         const { hasReachedBottom } = this.state;
 
         if (isBottom && hasReachedBottom !== true) {
-            this.getData();
+            this.props.getData();
             this.setState({ 
-                "hasReachedBottom": true, 
-                "loading": true 
+                "hasReachedBottom": true
             });
         }
     }
 
-    getData() {
-        fetch("https://api.github.com/users/jjplusplus")
-            .then(res => res.json())
-            .then(result => {
-                return this.setState({
-                    "data": result,
-                    "loading": false
-                })
-            }).catch(error => {
-                window.alert("There was a problem with the network request");
-                return this.setState({
-                    "loading": false,
-                })
-            });
-    }
+    // getData() {
+    //     fetch("https://api.github.com/users/jjplusplus")
+    //         .then(res => res.json())
+    //         .then(result => {
+    //             return this.setState({
+    //                 "data": result,
+    //                 "loading": false
+    //             })
+    //         }).catch(error => {
+    //             window.alert("There was a problem with the network request");
+    //             return this.setState({
+    //                 "loading": false,
+    //             })
+    //         });
+    // }
 
     render() {
         const {verticalPosition, scrollPercentage, isBottom, isTop } = this.props;
-        const { data, loading, hasReachedBottom } = this.state;
-
-
+        const { data, loading } = this.props;
 
         return (
             <div className="react-scroll-demo">
@@ -260,4 +269,16 @@ class HomePage extends Component<Props, State> {
     }
 }
 
-export default ScrollWrapper(HomePage);
+const mapStateToProps = (state: AppState) => {
+    return {
+        loading: state.loading,
+        data: state.data
+    };
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
+    getData: () => dispatch(getData()),
+});
+
+export default ScrollWrapper( connect(mapStateToProps, mapDispatchToProps)(HomePage) );
+

@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 */
 
 interface OwnProps {
-    WrappedComponent: React.Component;
+    WrappedComponent: any;
 }
 
 export default function (WrappedComponent: any) {
