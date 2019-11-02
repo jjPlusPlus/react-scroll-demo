@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ScrollWrapper from '../ScrollWrapper';
-import { number } from 'prop-types';
 
 import * as c3 from "c3";
 
@@ -156,7 +155,7 @@ class HomePage extends Component<Props, State> {
 
     render() {
         const {verticalPosition, scrollPercentage, isBottom, isTop } = this.props;
-        const { data, loading, hasReachedBottom } = this.state;
+        const { data, loading } = this.state;
 
 
 
